@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>Favorites</h1>
+</div>
+
+<p><%= link_to 'Add a New Favorite', new_favorite_url, class: 'btn btn-primary' %></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Post</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td><%= favorite.user_id %></td>
+        <td><%= favorite.post_id %></td>
+        <td><%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, favorite_url(favorite), class: 'btn btn-primary' %></td>
+        <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_favorite_url(favorite), class: 'btn btn-warning' %></td>
+        <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, favorite_url(favorite), method: 'delete', data: { confirm: "Do you really want to delete this favorite?" }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

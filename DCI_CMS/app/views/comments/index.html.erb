@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h1>Comments</h1>
+</div>
+
+<p><%= link_to 'Add a New Comment', new_comment_url, class: 'btn btn-primary' %></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Post</th>
+      <th>Commented on</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user_id %></td>
+        <td><%= comment.post_id %></td>
+        <td><%= comment.commented_on %></td>
+        <td><%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, comment_url(comment), class: 'btn btn-primary' %></td>
+        <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_comment_url(comment), class: 'btn btn-warning' %></td>
+        <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, comment_url(comment), method: 'delete', data: { confirm: "Do you really want to delete this comment?" }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

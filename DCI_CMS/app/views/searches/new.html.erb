@@ -1,0 +1,17 @@
+<h1>New Search</h1>
+
+<%= form_tag(searches_url, method: 'post') do %>
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id %>
+  </div>
+
+  <div>
+    <%= label_tag :search_text %><br />
+    <%= text_field_tag :search_text %>
+  </div>
+
+  <div>
+    <%= submit_tag "Create Search" %>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h1>Editing Topic #<%= @topic.id %></h1>
+</div>
+
+<%= form_tag(topic_url(@topic), method: 'patch', class: 'form-horizontal') do %>
+  <div class="form-group">
+    <%= label_tag :post_id, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-6">
+      <%= number_field_tag :post_id, @topic.post_id, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :tag_id, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-6">
+      <%= number_field_tag :tag_id, @topic.tag_id, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-6">
+      <%= submit_tag "Update Topic", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<h1>Editing Search #<%= @search.id %></h1>
+
+<%= form_tag(search_url(@search), method: 'patch') do %>
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id, @search.user_id %>
+  </div>
+
+  <div>
+    <%= label_tag :search_text %><br />
+    <%= text_field_tag :search_text, @search.search_text %>
+  </div>
+
+  <div>
+    <%= submit_tag "Update Search" %>
+  </div>
+<% end %>
