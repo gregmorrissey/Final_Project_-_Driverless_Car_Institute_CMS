@@ -1,4 +1,6 @@
 DCICms::Application.routes.draw do
+  root 'posts#index'
+
   # Routes for the Topic resource:
   # CREATE
   get '/topics/new', controller: 'topics', action: 'new', as: 'new_topic'
