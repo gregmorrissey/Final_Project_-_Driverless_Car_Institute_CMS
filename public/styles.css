@@ -1,13 +1,9 @@
-body{
-    background: url(DCI_logo_color.jpg) no-repeat center center fixed;
+#logo{
+    background: url(DCI_logo_color_bg.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: 100% auto;
-    margin-top: 12%;    
+    background-size: 50%;
+    margin-top: auto;  
 }
 
-#logo{
-    background:url(DCI_logo_color.jpg) no-repeat center center;
-    height: 500px;
-}

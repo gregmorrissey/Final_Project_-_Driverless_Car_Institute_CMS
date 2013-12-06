@@ -40,17 +40,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Login/Register", users_url %></li>
-        
-        
+        <li><%= link_to "Login/Register", users_url %></li>   
         <li><%= link_to "Blog", posts_url %></li>
-        
-
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>
 
-  <div class="container" id="logo">
+  <div class="container">
     <% if notice.present? %>
       <div class="alert alert-dismissable alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
