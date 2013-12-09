@@ -1,8 +1,17 @@
+<% if current_user.id == @user.id || current_user.admin? %>
+
 <div class="page-header">
-  <h1>Editing User #<%= @user.id %></h1>
 </div>
 
 <%= form_tag(user_url(@user), method: 'patch', class: 'form-horizontal') do %>
+
+
+<% if current_user.id == @user.id %>
+  <div class="form-group">
+    <%=  link_to 'Change Password', edit_user_registration_path, class: 'btn btn-primary form-control'%>
+  </div>
+<% end %>
+
   <div class="form-group">
     <%= label_tag :first_name, nil, class: 'col-md-2 control-label' %>
     <div class="col-md-6">
@@ -66,6 +75,8 @@
     </div>
   </div>
 
+
+<% if current_user.admin? %>
   <div class="form-group">
     <%= label_tag :author, nil, class: 'col-md-2 control-label' %>
     <div class="col-md-6">
@@ -79,24 +90,20 @@
       <%= text_field_tag :admin, @user.admin, class: 'form-control' %>
     </div>
   </div>
-
-  <div class="form-group">
-    <%= label_tag :bio, nil, class: 'col-md-2 control-label' %>
-    <div class="col-md-6">
-      <%= text_field_tag :bio, @user.bio, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag :photo, nil, class: 'col-md-2 control-label' %>
-    <div class="col-md-6">
-      <%= text_field_tag :photo, @user.photo, class: 'form-control' %>
-    </div>
-  </div>
+<% end %>
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-6">
       <%= submit_tag "Update User", class: 'btn btn-primary' %>
+
+      <%= link_to "Delete User", user_url(@user), method: 'delete', data: { confirm: "Do you really want to delete this user?" }, class: 'btn btn-danger' %>
     </div>
   </div>
+
+<% end %>
+
+<% else %>
+
+<%= render template: "home/index" %>
+
 <% end %>

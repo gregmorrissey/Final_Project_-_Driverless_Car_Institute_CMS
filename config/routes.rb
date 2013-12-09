@@ -2,7 +2,7 @@ DCICms::Application.routes.draw do
   devise_for :users
   root 'home#index'
 
-  get '/home', controller: 'home', action: 'index'
+  get '/home', controller: 'home', action: 'index', as: 'home'
 
   # Routes for the Topic resource:
   # CREATE

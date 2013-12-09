@@ -25,8 +25,6 @@ before_filter :authenticate_user!
     @user.facebook = params[:facebook]
     @user.author = params[:author]
     @user.admin = params[:admin]
-    @user.bio = params[:bio]
-    @user.photo = params[:photo]
 
     if @user.save
       redirect_to users_url, notice: "User created successfully."
@@ -64,8 +62,12 @@ before_filter :authenticate_user!
 
   def destroy
     @user = User.find_by(id: params[:id])
-    @user.destroy
+    if current_user.id == @user.id || current_user.admin?
+      @user.destroy
 
-    redirect_to users_url, notice: "User deleted."
+      redirect_to users_url, notice: "User deleted."
+    else
+      redirect_to home_url
+    end
   end
 end
