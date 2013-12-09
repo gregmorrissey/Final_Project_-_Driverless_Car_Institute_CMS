@@ -1,34 +1,33 @@
 <div class="page-header">
-  <h1>Posts</h1>
+  <h1>Latest Industry News</h1>
 </div>
 
-<p><%= link_to 'Add a New Post', new_post_url, class: 'btn btn-primary' %></p>
+
 
 <table class="table table-hover">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Published</th>
-      <th>Published on</th>
-      <th>Post text</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  <% @posts.each do |post| %>
 
-  <tbody>
-    <% @posts.each do |post| %>
+    <thead>
       <tr>
-        <td><%= post.user_id %></td>
-        <td><%= post.published %></td>
-        <td><%= post.published_on %></td>
-        <td><%= post.post_text %></td>
-        <td><%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, post_url(post), class: 'btn btn-primary' %></td>
-        <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_post_url(post), class: 'btn btn-warning' %></td>
-        <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, post_url(post), method: 'delete', data: { confirm: "Do you really want to delete this post?" }, class: 'btn btn-danger' %></td>
+        <th><%= link_to post.title, post_url(post) %></th>
       </tr>
-    <% end %>
-  </tbody>
+    </thead>
+
+    <tbody>
+        <tr>
+          <td><small><%= post.published_on %></small></td>
+          <td><small><%= post.user_id %></small></td>
+        </tr>
+        <tr>
+          <td><%= post.post_text %></td>
+        </tr>
+      <% if current_user.try(:admin?) %>
+        <tr>
+          <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_post_url(post), class: 'btn btn-warning' %></td>
+          <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, post_url(post), method: 'delete', data: { confirm: "Do you really want to delete this post?" }, class: 'btn btn-danger' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  <% end %>
 </table>
 
