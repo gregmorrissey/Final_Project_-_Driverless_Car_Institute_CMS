@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-before_filter :authenticate_user!
+before_filter :authenticate_user!, :except => [:show, :index]
 
   def index
     @tags = Tag.all
@@ -14,7 +14,7 @@ before_filter :authenticate_user!
 
   def create
     @tag = Tag.new
-    @tag.tag_subject = params[:tag_subject]
+    @tag.name = params[:name]
 
     if @tag.save
       redirect_to tags_url, notice: "Tag created successfully."
@@ -29,7 +29,7 @@ before_filter :authenticate_user!
 
   def update
     @tag = Tag.find_by(id: params[:id])
-    @tag.tag_subject = params[:tag_subject]
+    @tag.name = params[:name]
 
     if @tag.save
       redirect_to tags_url, notice: "Tag updated successfully."

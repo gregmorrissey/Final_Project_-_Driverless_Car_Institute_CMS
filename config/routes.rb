@@ -3,7 +3,7 @@ DCICms::Application.routes.draw do
   root 'home#index'
 
   get '/home', controller: 'home', action: 'index', as: 'home'
-
+  
   #------------------------------
 
   # Routes for the topic resource:

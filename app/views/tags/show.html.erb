@@ -1,9 +1,21 @@
 <div class="page-header">
-  <h1>Tag #<%= @tag.id %></h1>
+  <h1>Tag: <%= @tag.name %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Tag subject</dt>
-  <dd><%= @tag.tag_subject %></dd>
-
+  
+	<ul>
+  
+		<% post_list = Topic.where(:tag_id => @tag.id) %>
+			<% post_list.each do |post| %>
+			  <li>
+		    	<% p = Post.find(post.post_id) %>
+		    	<%= link_to p.title, post_url(p) %>
+		  	</li>
+		  <% end %>
+  </ul>
 </dl>
+
+
+
+

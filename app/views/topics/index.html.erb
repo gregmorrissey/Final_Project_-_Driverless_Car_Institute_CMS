@@ -1,8 +1,10 @@
+<div class="page-header">
 <h1>Topics</h1>
+</div>
 
-<p><%= link_to 'Add a New Topic', new_url %></p>
+<p><%= link_to 'Add a New Topic', new_topic_url %></p>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Post</th>
@@ -16,11 +18,11 @@
   <tbody>
   <% @topics.each do |topic| %>
     <tr>
-      <td><%= topic.post %></td>
-      <td><%= topic.tag %></td>
-      <td><%= link_to 'Show', url(topic) %></td>
-      <td><%= link_to 'Edit', edit_url(topic) %></td>
-      <td><%= link_to 'Destroy', url(topic), method: 'delete', data: { confirm: "Do you really want to delete this topic?" } %></td>
+      <td><%= topic.post.title %></td>
+      <td><%= topic.tag.name %></td>
+      <td><%= link_to 'Show', topic_url(topic) %></td>
+      <td><%= link_to 'Edit', edit_topic_url(topic) %></td>
+      <td><%= link_to 'Destroy', topic_url(topic), method: 'delete', data: { confirm: "Do you really want to delete this topic?" } %></td>
     </tr>
   <% end %>
   </tbody>

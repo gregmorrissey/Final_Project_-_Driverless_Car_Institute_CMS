@@ -13,4 +13,16 @@
 <br> 
   <dd><%= @post.post_text.html_safe %></dd>
 
+<br>
+  <dd>
+    <% post_list = Topic.where(:post_id => @post.id) %>
+    <% post_list.each do |tag| %>
+
+        <% t = Tag.find(tag.tag_id) %> 
+        <%= link_to t.name, tag_url(t) %>, 
+    <% end %>
+  </dd>
 </dl>
+
+
+

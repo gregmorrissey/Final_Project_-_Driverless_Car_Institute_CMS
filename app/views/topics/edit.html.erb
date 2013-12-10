@@ -1,17 +1,49 @@
 <h1>Editing Topic #<%= @topic.id %></h1>
 
-<%= form_tag(topic_url(@topic), method: 'patch') do %>
-  <div>
-    <%= label_tag :post %><br />
-    <%= text_field_tag :post, @topic.post %>
+<%= form_tag(topic_url(@topic), method: 'patch', class: 'form-horizontal') do %>
+  <div class="form-group">
+    <%= label_tag :post_id, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-6">
+      <select name="post_id" class="form-control">
+        <% Post.all.each do |post| %>
+          <% if post.id == @topic.post_id %>
+            <% previously_selected = "selected" %>
+          <% else %>
+            <% previously_selected = "" %>
+          <% end %>
+
+          <option value="<%= post.id %>" <%= previously_selected %>>
+            <%= post.title%>
+          </option>
+
+        <% end %>
+      </select>
+    </div>
   </div>
 
-  <div>
-    <%= label_tag :tag %><br />
-    <%= text_field_tag :tag, @topic.tag %>
+  <div class="form-group">
+    <%= label_tag :tag_id, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-6">
+      <select name="tag_id" class="form-control">
+        <% Tag.all.each do |tag| %>
+          <% if tag.id == @topic.tag_id %>
+            <% previously_selected = "selected" %>
+          <% else %>
+            <% previously_selected = "" %>
+          <% end %>
+
+          <option value="<%= tag.id %>" <%= previously_selected %>>
+            <%= tag.name%>
+          </option>
+
+        <% end %>
+      </select>
+    </div>
   </div>
 
-  <div>
-    <%= submit_tag "Update Topic" %>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-6">
+      <%= submit_tag "Update Topic", class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>
