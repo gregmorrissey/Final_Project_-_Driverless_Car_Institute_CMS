@@ -1,5 +1,18 @@
 == README
 
+ADMIN USER:
+Username: admin@hotmail.com
+Password: admin1234
+
+AUTHOR USER:
+Username: author@hotmail.com
+Password: author1234
+
+REGULAR USER:
+Username: user@hotmail.com
+Password: user1234
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
