@@ -1,5 +1,4 @@
 class TopicsController < ApplicationController
-before_filter :authenticate_user!
 
   def index
     @topics = Topic.all
@@ -14,8 +13,8 @@ before_filter :authenticate_user!
 
   def create
     @topic = Topic.new
-    @topic.post_id = params[:post_id]
-    @topic.tag_id = params[:tag_id]
+    @topic.post = params[:post]
+    @topic.tag = params[:tag]
 
     if @topic.save
       redirect_to topics_url, notice: "Topic created successfully."
@@ -30,8 +29,8 @@ before_filter :authenticate_user!
 
   def update
     @topic = Topic.find_by(id: params[:id])
-    @topic.post_id = params[:post_id]
-    @topic.tag_id = params[:tag_id]
+    @topic.post = params[:post]
+    @topic.tag = params[:tag]
 
     if @topic.save
       redirect_to topics_url, notice: "Topic updated successfully."

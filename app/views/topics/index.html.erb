@@ -1,10 +1,8 @@
-<div class="page-header">
-  <h1>Topics</h1>
-</div>
+<h1>Topics</h1>
 
-<p><%= link_to 'Add a New Topic', new_topic_url, class: 'btn btn-primary' %></p>
+<p><%= link_to 'Add a New Topic', new_url %></p>
 
-<table class="table table-hover">
+<table>
   <thead>
     <tr>
       <th>Post</th>
@@ -16,15 +14,15 @@
   </thead>
 
   <tbody>
-    <% @topics.each do |topic| %>
-      <tr>
-        <td><%= topic.post_id %></td>
-        <td><%= topic.tag_id %></td>
-        <td><%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, topic_url(topic), class: 'btn btn-primary' %></td>
-        <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_topic_url(topic), class: 'btn btn-warning' %></td>
-        <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, topic_url(topic), method: 'delete', data: { confirm: "Do you really want to delete this topic?" }, class: 'btn btn-danger' %></td>
-      </tr>
-    <% end %>
+  <% @topics.each do |topic| %>
+    <tr>
+      <td><%= topic.post %></td>
+      <td><%= topic.tag %></td>
+      <td><%= link_to 'Show', url(topic) %></td>
+      <td><%= link_to 'Edit', edit_url(topic) %></td>
+      <td><%= link_to 'Destroy', url(topic), method: 'delete', data: { confirm: "Do you really want to delete this topic?" } %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 

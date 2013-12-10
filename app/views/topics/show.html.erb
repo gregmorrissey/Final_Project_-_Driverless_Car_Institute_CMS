@@ -1,12 +1,10 @@
-<div class="page-header">
-  <h1>Topic #<%= @topic.id %></h1>
-</div>
+<h1>Topic #<%= @topic.id %></h1>
 
-<dl class="dl-horizontal">
+<dl>
   <dt>Post</dt>
-  <dd><%= @topic.post_id %></dd>
+  <dd><%= @topic.post %></dd>
 
   <dt>Tag</dt>
-  <dd><%= @topic.tag_id %></dd>
+  <dd><%= @topic.tag %></dd>
 
 </dl>

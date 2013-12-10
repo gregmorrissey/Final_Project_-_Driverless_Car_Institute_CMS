@@ -4,7 +4,9 @@ DCICms::Application.routes.draw do
 
   get '/home', controller: 'home', action: 'index', as: 'home'
 
-  # Routes for the Topic resource:
+  #------------------------------
+
+  # Routes for the topic resource:
   # CREATE
   get '/topics/new', controller: 'topics', action: 'new', as: 'new_topic'
   post '/topics', controller: 'topics', action: 'create', as: 'topics'
@@ -19,6 +21,7 @@ DCICms::Application.routes.draw do
 
   # DELETE
   delete '/topics/:id', controller: 'topics', action: 'destroy'
+
   #------------------------------
 
   # Routes for the Tag resource:

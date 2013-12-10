@@ -10,14 +10,20 @@ before_filter :authenticate_user!, :except => [:show, :index]
   end
 
   def new
+    if current_user.author?
+      render 'new'
+    else
+      redirect_to posts_url, notice: "You are not signed in as an author."
+    end
   end
 
   def create
     @post = Post.new
-    @post.user_id = params[:user_id]
+    @post.user_id = current_user.id
     @post.published = params[:published]
     @post.published_on = params[:published_on]
     @post.post_text = params[:post_text]
+    @post.title = params[:title]
 
     if @post.save
       redirect_to posts_url, notice: "Post created successfully."
@@ -28,14 +34,20 @@ before_filter :authenticate_user!, :except => [:show, :index]
 
   def edit
     @post = Post.find_by(id: params[:id])
+    if current_user.admin? || current_user.id == @post.user_id
+      @post = Post.find_by(id: params[:id])
+    else
+      redirect_to posts_url, notice: "You are not authorized to edit this post."  
+    end
   end
 
   def update
     @post = Post.find_by(id: params[:id])
-    @post.user_id = params[:user_id]
+    @post.user_id = current_user.id
     @post.published = params[:published]
     @post.published_on = params[:published_on]
     @post.post_text = params[:post_text]
+    @post.title = params[:title]
 
     if @post.save
       redirect_to posts_url, notice: "Post updated successfully."

@@ -2,32 +2,43 @@
   <h1>Latest Industry News</h1>
 </div>
 
+<div>
+<% if current_user.try(:author?) || current_user.try(:admin?) %>
+  <div><%= link_to 'Add a New Post', new_post_url, class: 'btn btn-primary' %></div>
+  
+  <div>
+    <% @posts.each do |post| %>
+      <% if post.published == false %>
+        <div><h4><%= post.title %></h4><%= post.user.first_name %> <%= post.user.last_name %>  <%= link_to "Edit", edit_post_url(post) %>  <%= link_to "Delete", post_url(post), method: 'delete', data: { confirm: "Do you really want to delete this post?" } %></div>
+      <% end %>
+    <% end %>
+  </div>
+
+<% end %>
+</div>
 
 
-<table class="table table-hover">
-  <% @posts.each do |post| %>
+<div>
+  <% @posts.order('published_on DESC').each do |post| %>
 
-    <thead>
-      <tr>
-        <th><%= link_to post.title, post_url(post) %></th>
-      </tr>
-    </thead>
+<% if post.try(:published?) %>
+    <div>
+      <h3><%= link_to post.title , post_url(post) %></h3>
+      <h5><small>Post Date: <%= post.published_on %></small></h5>
+      <h5><small>Authored By: <%= post.user.first_name %> <%= post.user.last_name %></small></h5>
+    </div>  
 
-    <tbody>
-        <tr>
-          <td><small><%= post.published_on %></small></td>
-          <td><small><%= post.user_id %></small></td>
-        </tr>
-        <tr>
-          <td><%= post.post_text %></td>
-        </tr>
-      <% if current_user.try(:admin?) %>
-        <tr>
-          <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_post_url(post), class: 'btn btn-warning' %></td>
-          <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, post_url(post), method: 'delete', data: { confirm: "Do you really want to delete this post?" }, class: 'btn btn-danger' %></td>
-        </tr>
-        <% end %>
-    </tbody>
+    <div><%= truncate post.post_text, length: 100 %></div>
+    
+    <div>
+      <% if current_user.try(:id) == post.user_id || current_user.try(:admin?) %>
+          <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_post_url(post), class: 'btn btn-warning' %>
+          
+          <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, post_url(post), method: 'delete', data: { confirm: "Do you really want to delete this post?" }, class: 'btn btn-danger' %>
+      <% end %>
+
+    </div>
   <% end %>
-</table>
+<% end %>
+</div>
 
