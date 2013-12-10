@@ -10,6 +10,7 @@
     <% @posts.each do |post| %>
       <% if post.published == false %>
         <div><h4><%= post.title %></h4><%= post.user.first_name %> <%= post.user.last_name %>  <%= link_to "Edit", edit_post_url(post) %>  <%= link_to "Delete", post_url(post), method: 'delete', data: { confirm: "Do you really want to delete this post?" } %></div>
+        ---------------------------------------------------
       <% end %>
     <% end %>
   </div>
@@ -38,6 +39,7 @@
       <% end %>
 
     </div>
+    <br>
   <% end %>
 <% end %>
 </div>
