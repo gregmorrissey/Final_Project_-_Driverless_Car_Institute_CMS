@@ -6,7 +6,9 @@ before_filter :authenticate_user!
   end
 
   def show
-    @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.where(post_id: params[:post_id]).where(tag_id: params[:tag_id])
+    @post_id = @topic.find_by(post_id: params[:post_id])
+    @tag_id = @topic.find_by(tag_id: params[:tag_id])
   end
 
   def new
@@ -28,35 +30,35 @@ before_filter :authenticate_user!
       render 'new'
     end
   end
-
-  def edit
-    @topic = Topic.find_by(id: params[:id])
-  end
   
-  def edit
-    @post = Topic.find_by(id: params[:id])
-    if current_user.admin?
-      @topic = topic.find_by(id: params[:id])
-    else
-      redirect_to home_url, notice: "You are not signed in as an administrator."  
-    end
-  end
-  
-  def update
-    @topic = Topic.find_by(id: params[:id])
-    @topic.post_id = params[:post_id]
-    @topic.tag_id = params[:tag_id]
+#  def edit
+#      @topic = Topic.where(post_id: params[:post_id]).where(tag_id: params[:tag_id])
+#    if current_user.admin?
+#      @topic = @topic[0]
+#      @post_id = @topic.post_id
+#      @tag_id = @topic.tag_id
+#    else
+#      redirect_to home_url, notice: "You are not signed in as an administrator."  
+#    end
+#  end
+#  
+#  def update
+#    @topic = Topic.where(post_id: params[:post_id]).where(tag_id: params[:tag_id])
+#    @topic.delete_all
+#    @topic = Topic.new
+#    @topic.post_id = params[:post_id]
+#    @topic.tag_id = params[:tag_id]
+#
+#    if @topic.update_all('post_id = @topic.post_id')
+#      redirect_to topics_url, notice: "Topic updated successfully."
+#    else
+#      render 'edit'
+#    end
+#  end
 
-    if @topic.save
-      redirect_to topics_url, notice: "Topic updated successfully."
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    @topic = Topic.find_by(id: params[:id])
-    @topic.destroy
+  def delete
+    @topic = Topic.where(post_id: params[:post_id]).where(tag_id: params[:tag_id])
+    @topic.delete_all
 
     redirect_to topics_url, notice: "Topic deleted."
   end

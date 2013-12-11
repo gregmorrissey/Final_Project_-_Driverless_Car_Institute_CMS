@@ -13,14 +13,14 @@ DCICms::Application.routes.draw do
 
   # READ
   get '/topics', controller: 'topics', action: 'index'
-  get '/topics/:id', controller: 'topics', action: 'show', as: 'topic'
+  get '/topics/:post_id/:tag_id', controller: 'topics', action: 'show', as: 'topic'
 
-  # UPDATE
-  get '/topics/:id/edit', controller: 'topics', action: 'edit', as: 'edit_topic'
-  patch '/topics/:id', controller: 'topics', action: 'update'
+  # UPDATE - Removed Update Routes. Please Delete and Create New
+  # get '/topics/:post_id/:tag_id/edit', controller: 'topics', action: 'edit', as: 'edit_topic'
+  # patch '/topics/:post_id/:tag_id', controller: 'topics', action: 'update'
 
   # DELETE
-  delete '/topics/:id', controller: 'topics', action: 'destroy'
+  delete '/topics/:post_id/:tag_id', controller: 'topics', action: 'delete'
 
   #------------------------------
 

@@ -1,12 +1,12 @@
-<h1>Editing Topic #<%= @topic.id %></h1>
+<h1>Editing Topic</h1>
 
-<%= form_tag(topic_url(@topic), method: 'patch', class: 'form-horizontal') do %>
+<%= form_tag(topic_url(@post_id, @tag_id), method: 'patch', class: 'form-horizontal') do %>
   <div class="form-group">
     <%= label_tag :post_id, nil, class: 'col-md-2 control-label' %>
     <div class="col-md-6">
       <select name="post_id" class="form-control">
         <% Post.all.each do |post| %>
-          <% if post.id == @topic.post_id %>
+          <% if post.id == @post_id %>
             <% previously_selected = "selected" %>
           <% else %>
             <% previously_selected = "" %>
@@ -26,7 +26,7 @@
     <div class="col-md-6">
       <select name="tag_id" class="form-control">
         <% Tag.all.each do |tag| %>
-          <% if tag.id == @topic.tag_id %>
+          <% if tag.id == @tag_id %>
             <% previously_selected = "selected" %>
           <% else %>
             <% previously_selected = "" %>
